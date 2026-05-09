@@ -1,6 +1,6 @@
 # From Figma To Code
 
-A collection of responsive frontend websites and tools — built from Figma designs and vanilla HTML/CSS all the way through Tailwind CSS, DaisyUI, and Bootstrap. 8 projects consolidated from separate repos.
+A collection of responsive frontend websites and tools — built from Figma designs and vanilla HTML/CSS all the way through Tailwind CSS, DaisyUI, and Bootstrap. 9 projects consolidated from separate repos.
 
 Each project lives in its own folder with its original files intact.
 
@@ -17,7 +17,8 @@ Each project lives in its own folder with its original files intact.
 | [Fruit Brust](./Fruit-Brust) | Fruit juice brand landing page | HTML, Tailwind CSS, DaisyUI | [Live](https://sadiaafsana138.github.io/Fruit-Brust/) |
 | [Justice](./Justice) | Legal services landing page | HTML, Bootstrap, CSS | [Live](https://sadiaafsana138.github.io/justice/) |
 | [All Things Are Possible](./All-Thinks-Are-Possible) | Early static website — first project | HTML, CSS | [Live](https://sadiaafsana138.github.io/All-Thinks-Are-Possible-Website/) |
-| [Playlist Schedule Manager](./Playlist-Schedule-Manager) | Study planner that turns playlists into daily schedules | HTML, CSS, JavaScript | [Live](https://sadiaafsana138.github.io/Playlist_schedule_manager/) |
+| [Playlist Schedule Manager](./Playlist_schedule_manager) | Study planner that turns playlists into daily schedules | HTML, CSS, JavaScript | [Live](https://sadiaafsana138.github.io/Playlist_schedule_manager/) |
+| [Summer Sale Website](./Summer-Sale-Website) | Summer sale landing page with discount calculator | HTML, Tailwind CSS, DaisyUI, JavaScript | [Live](https://651da326e815812705d1af33--fancy-daffodil-a4533e.netlify.app/) |
 
 ---
 
@@ -29,6 +30,7 @@ Several projects were designed in **Figma** before being coded. The original `.f
 - Flower Shop Responsive — Figma design included
 - Fruit Brust — Figma design included
 - Justice — Figma design included
+- Summer Sale Website — Figma design included
 
 ---
 
@@ -41,7 +43,7 @@ These projects reflect a clear learning journey:
 | Early | Flower Shop, All Things Are Possible | Pure HTML + CSS, no framework, no design tool |
 | Middle | Architect, Gamer Zone | Vanilla CSS with better structure, Figma-first workflow |
 | Later | Fruit Brust, Justice | Tailwind CSS, DaisyUI, Bootstrap — component-based styling |
-| Interactive | Playlist Schedule Manager | Added JavaScript for dynamic functionality |
+| Interactive | Playlist Schedule Manager, Summer Sale Website | Added JavaScript for dynamic functionality and calculations |
 
 ---
 
