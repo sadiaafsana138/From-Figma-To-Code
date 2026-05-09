@@ -10,14 +10,14 @@ Each project lives in its own folder with its original files intact.
 
 | Project | Description | Tech | Live |
 |---|---|---|---|
-| [Architect](./Architect) | Architecture firm landing page | HTML, Vanilla CSS | [Live](https://sadiaafsana138.github.io/Architect/) |
-| [Gamer Zone](./Gamer-Zone) | Gaming brand landing page | HTML, Vanilla CSS | [Live](https://sadiaafsana138.github.io/Gamer-Zone/) |
-| [Flower Shop](./Flower-Shop) | Online flower shop — early version | HTML, Vanilla CSS | [Live](https://sadiaafsana138.github.io/Flower-shop/) |
-| [Flower Shop Responsive](./Flower-Shop-Responsive) | Flower shop — improved responsive version | HTML, Vanilla CSS | [Live](https://sadiaafsana138.github.io/Flower-Shop_Responsive/) |
-| [Fruit Brust](./Fruit-Brust) | Fruit juice brand landing page | HTML, Tailwind CSS, DaisyUI | [Live](https://sadiaafsana138.github.io/Fruit-Brust/) |
-| [Justice](./Justice) | Legal services landing page | HTML, Bootstrap, CSS | [Live](https://sadiaafsana138.github.io/justice/) |
-| [All Things Are Possible](./All-Thinks-Are-Possible) | Early static website — first project | HTML, CSS | [Live](https://sadiaafsana138.github.io/All-Thinks-Are-Possible-Website/) |
-| [Playlist Schedule Manager](./Playlist_schedule_manager) | Study planner that turns playlists into daily schedules | HTML, CSS, JavaScript | [Live](https://sadiaafsana138.github.io/Playlist_schedule_manager/) |
+| [Architect](./Architect) | Architecture firm landing page | HTML, Vanilla CSS | [Live](https://sadiaafsana138.github.io/From-Figma-To-Code/Architect/) |
+| [Gamer Zone](./Gamer-Zone) | Gaming brand landing page | HTML, Vanilla CSS | [Live](https://sadiaafsana138.github.io/From-Figma-To-Code/Gamer-Zone/) |
+| [Flower Shop](./Flower-shop) | Online flower shop — early version | HTML, Vanilla CSS | [Live](https://sadiaafsana138.github.io/From-Figma-To-Code/Flower-shop/) |
+| [Flower Shop Responsive](./Flower-Shop_Responsive) | Flower shop — improved responsive version | HTML, Vanilla CSS | [Live](https://sadiaafsana138.github.io/From-Figma-To-Code/Flower-Shop_Responsive/) |
+| [Fruit Brust](./Fruit-Brust) | Fruit juice brand landing page | HTML, Tailwind CSS, DaisyUI | [Live](https://sadiaafsana138.github.io/From-Figma-To-Code/Fruit-Brust/) |
+| [Justice](./justice) | Legal services landing page | HTML, Bootstrap, CSS | [Live](https://sadiaafsana138.github.io/From-Figma-To-Code/justice/) |
+| [All Things Are Possible](./All-Thinks-Are-Possible-Website) | Early static website — first project | HTML, CSS | [Live](https://sadiaafsana138.github.io/From-Figma-To-Code/All-Thinks-Are-Possible-Website/) |
+| [Playlist Schedule Manager](./Playlist_schedule_manager) | Study planner that turns playlists into daily schedules | HTML, CSS, JavaScript | [Live](https://sadiaafsana138.github.io/From-Figma-To-Code/Playlist_schedule_manager/) |
 | [Summer Sale Website](./Summer-Sale-Website) | Summer sale landing page with discount calculator | HTML, Tailwind CSS, DaisyUI, JavaScript | [Live](https://651da326e815812705d1af33--fancy-daffodil-a4533e.netlify.app/) |
 
 ---
@@ -42,7 +42,7 @@ These projects reflect a clear learning journey:
 |---|---|---|
 | Early | Flower Shop, All Things Are Possible | Pure HTML + CSS, no framework, no design tool |
 | Middle | Architect, Gamer Zone | Vanilla CSS with better structure, Figma-first workflow |
-| Later | Fruit Brust, Justice | Tailwind CSS, DaisyUI, Bootstrap — component-based styling |
+| Later | Fruit Brust, Justice, Summer Sale | Tailwind CSS, DaisyUI, Bootstrap — component-based styling |
 | Interactive | Playlist Schedule Manager, Summer Sale Website | Added JavaScript for dynamic functionality and calculations |
 
 ---
@@ -61,4 +61,4 @@ These projects reflect a clear learning journey:
 
 ## Note
 
-These projects were previously separate standalone repositories. They have been archived and consolidated here for a cleaner profile. All live GitHub Pages links above still work from the original repos.
+These projects were previously separate standalone repositories. They have been archived and consolidated here for a cleaner profile. All live links above are hosted via GitHub Pages from this repo.
