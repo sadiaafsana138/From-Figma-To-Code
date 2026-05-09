@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learning Playlist Planner</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f14;
+    --surface: #161920;
+    --accent: #f0c040;
+    --accent2: #4fc3f7;
+    --accent3: #a78bfa;
+    --text: #e8eaf0;
+    --muted: #6b7280;
+    --green: #34d399;
+    --border: #2a2f3e;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Mono', monospace; min-height: 100vh; padding: 32px 20px 60px; }
+
+  .hero { text-align: center; margin-bottom: 40px; }
+  .hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 800; letter-spacing: -1px; color: var(--accent); line-height: 1.1; }
+  .hero p { color: var(--muted); margin-top: 8px; font-size: 0.82rem; letter-spacing: 1px; text-transform: uppercase; }
+
+  .stats-row { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; margin-bottom: 32px; }
+  .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px 24px; text-align: center; min-width: 140px; flex: 1; max-width: 190px; }
+  .stat-card .val { font-family: 'Syne', sans-serif; font-size: 1.85rem; font-weight: 800; color: var(--accent); }
+  .stat-card .lbl { font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+
+  .controls { display: flex; gap: 12px; justify-content: center; align-items: center; margin-bottom: 36px; flex-wrap: wrap; }
+  .slider-wrap { display: flex; align-items: center; gap: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 10px 20px; }
+  .slider-wrap label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+  input[type=range] { -webkit-appearance: none; width: 200px; height: 4px; background: var(--border); border-radius: 2px; outline: none; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%; background: var(--accent); cursor: pointer; }
+  .slider-val { color: var(--accent); font-weight: 500; min-width: 56px; font-family: 'Syne', sans-serif; font-size: 1.1rem; }
+
+  .section-title { font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); margin-bottom: 14px; border-left: 3px solid var(--accent); padding-left: 12px; }
+
+  /* week groups */
+  .week-block { max-width: 900px; margin: 0 auto 40px; }
+  .week-header { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; flex-wrap: wrap; }
+  .week-badge { font-family: 'Syne', sans-serif; font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; padding: 4px 12px; border-radius: 20px; white-space: nowrap; }
+  .week-title { font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 700; color: var(--text); }
+  .week-meta { font-size: 0.72rem; color: var(--muted); margin-left: auto; }
+
+  .th-row { display: grid; grid-template-columns: 2fr 80px 80px 100px; gap: 12px; padding: 0 18px; margin-bottom: 5px; }
+  .th-row span { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); text-align: right; }
+  .th-row span:first-child { text-align: left; }
+
+  .week-topics { display: grid; grid-template-columns: 1fr; gap: 7px; }
+  .topic-row { display: grid; grid-template-columns: 2fr 80px 80px 100px; align-items: center; gap: 12px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 13px 18px; transition: border-color 0.18s; }
+  .topic-row:hover { border-color: var(--accent); }
+  .t-name { font-family: 'Syne', sans-serif; font-size: 0.88rem; font-weight: 700; }
+  .bar-wrap { background: var(--border); border-radius: 3px; height: 5px; overflow: hidden; margin-top: 5px; }
+  .bar-fill { height: 100%; border-radius: 3px; transition: width 0.4s; }
+  .t-min { font-size: 0.72rem; color: var(--accent2); text-align: right; }
+  .t-dur { font-size: 0.72rem; color: var(--accent); text-align: right; }
+  .t-days { font-size: 0.7rem; color: var(--green); text-align: right; }
+
+  /* calendar */
+  .cal-week-block { max-width: 900px; margin: 0 auto 28px; }
+  .cal-week-label { font-family: 'Syne', sans-serif; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--accent3); margin-bottom: 10px; padding-left: 4px; }
+  .cal-days-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
+  .day-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; transition: border-color 0.18s; }
+  .day-card:hover { border-color: var(--accent3); }
+  .day-label { font-family: 'Syne', sans-serif; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent3); margin-bottom: 9px; }
+  .dc-topic { font-size: 0.74rem; padding: 4px 0; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; gap: 6px; }
+  .dc-topic:last-of-type { border-bottom: none; }
+  .dc-name { color: var(--text); }
+  .dc-time { color: var(--accent); font-size: 0.68rem; flex-shrink: 0; }
+  .dc-total { margin-top: 9px; font-size: 0.68rem; display: flex; justify-content: space-between; padding-top: 7px; border-top: 1px solid var(--border); color: var(--muted); }
+  .dc-total span:last-child { color: var(--green); }
+
+  .footer { text-align: center; color: var(--muted); font-size: 0.68rem; letter-spacing: 1px; margin-top: 24px; text-transform: uppercase; }
+
+  @media (max-width: 560px) {
+    .topic-row, .th-row { grid-template-columns: 2fr 80px 80px; }
+    .t-days, .th-row span:last-child { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>📚 Learning Playlist Planner</h1>
+  <p>Data Science & Analytics · Similar Topics Grouped Together</p>
+</div>
+
+<div class="stats-row" id="statsRow"></div>
+
+<div style="max-width:900px;margin:0 auto 36px">
+  <div class="controls">
+    <div class="slider-wrap">
+      <label>Hours / Day</label>
+      <input type="range" id="hrsSlider" min="1" max="8" step="0.5" value="2">
+      <span class="slider-val" id="hrsVal">2 hrs</span>
+    </div>
+  </div>
+</div>
+
+<div style="max-width:900px;margin:0 auto 8px">
+  <div class="section-title">Learning Path — Topic Groups</div>
+</div>
+<div id="weeklyTopics"></div>
+
+<div style="max-width:900px;margin:40px auto 14px">
+  <div class="section-title">📅 Day-by-Day Schedule</div>
+</div>
+<div id="calendarOutput"></div>
+
+<div class="footer">Similar topics grouped into the same study block · Drag the slider to replan your schedule</div>
+
+<script>
+const groups = [
+  {
+    label: "Block 1", title: "Web Scraping", color: "#4fc3f7",
+    topics: [
+      { name: "Web Scraping",         mins: 50.28 },
+      { name: "Amazon Web Scraping",  mins: 48.00 },
+      { name: "Crypto Web API",       mins: 52.00 },
+    ]
+  },
+  {
+    label: "Block 2", title: "SQL — Full Track", color: "#f0c040",
+    topics: [
+      { name: "SQL – Beginner",      mins: 54.00 },
+      { name: "SQL – Intermediate",  mins: 56.35 },
+      { name: "SQL – Advanced",      mins: 44.97 },
+      { name: "SQL Questions",       mins: 65.00 },
+    ]
+  },
+  {
+    label: "Block 3", title: "Data Processing", color: "#34d399",
+    topics: [
+      { name: "Data Cleansing",  mins: 51.18 },
+      { name: "EDA",             mins: 32.73 },
+      { name: "Pandas",          mins: 165.00 },
+    ]
+  },
+  {
+    label: "Block 4", title: "Python", color: "#a78bfa",
+    topics: [
+      { name: "Python",  mins: 175.00 },
+    ]
+  },
+  {
+    label: "Block 5", title: "BI & Visualisation Tools", color: "#fb923c",
+    topics: [
+      { name: "Excel",     mins: 169.00 },
+      { name: "Tableau",   mins: 98.00 },
+      { name: "Power BI",  mins: 134.00 },
+    ]
+  },
+  {
+    label: "Block 6", title: "Cloud Platforms", color: "#f472b6",
+    topics: [
+      { name: "Azure",  mins: 82.00 },
+      { name: "AWS",    mins: 104.00 },
+    ]
+  },
+  {
+    label: "Block 7", title: "Portfolio & Wrap-up", color: "#facc15",
+    topics: [
+      { name: "Portfolio + Resume",  mins: 54.00 },
+      { name: "Exam",                mins: 10.00 },
+    ]
+  },
+];
+
+const allTopics = groups.flatMap(g => g.topics);
+const totalMins = allTopics.reduce((a, b) => a + b.mins, 0);
+const maxMins   = Math.max(...allTopics.map(t => t.mins));
+
+function fmt(m) {
+  const h = Math.floor(m / 60), mn = Math.round(m % 60);
+  return h === 0 ? `${mn}m` : `${h}h ${String(mn).padStart(2,'0')}m`;
+}
+
+function renderStats(hpd) {
+  const mpd = hpd * 60;
+  const days = Math.ceil(totalMins / mpd);
+  const wks = Math.floor(days / 7), rem = days % 7;
+  document.getElementById('statsRow').innerHTML = `
+    <div class="stat-card"><div class="val">${Math.round(totalMins)}</div><div class="lbl">Total Minutes</div></div>
+    <div class="stat-card"><div class="val">${fmt(totalMins)}</div><div class="lbl">Total Duration</div></div>
+    <div class="stat-card"><div class="val">${hpd}h</div><div class="lbl">Per Day</div></div>
+    <div class="stat-card"><div class="val">${days}</div><div class="lbl">Days to Finish</div></div>
+    <div class="stat-card"><div class="val">${wks}w ${rem}d</div><div class="lbl">Weeks + Days</div></div>
+    <div class="stat-card"><div class="val">${groups.length}</div><div class="lbl">Blocks</div></div>
+  `;
+}
+
+function renderWeeklyTopics(hpd) {
+  const mpd = hpd * 60;
+  document.getElementById('weeklyTopics').innerHTML = groups.map(g => {
+    const gTotal = g.topics.reduce((a, b) => a + b.mins, 0);
+    const rows = g.topics.map(t => {
+      const pct = (t.mins / maxMins * 100).toFixed(1);
+      const d   = (t.mins / mpd).toFixed(1);
+      return `<div class="topic-row">
+        <div>
+          <div class="t-name">${t.name}</div>
+          <div class="bar-wrap"><div class="bar-fill" style="width:${pct}%;background:${g.color}"></div></div>
+        </div>
+        <div class="t-min">${Math.round(t.mins)} min</div>
+        <div class="t-dur">${fmt(t.mins)}</div>
+        <div class="t-days">~${d} days</div>
+      </div>`;
+    }).join('');
+
+    return `<div class="week-block">
+      <div class="week-header">
+        <span class="week-badge" style="background:${g.color}20;color:${g.color};border:1px solid ${g.color}50">${g.label}</span>
+        <span class="week-title">${g.title}</span>
+        <span class="week-meta">${fmt(gTotal)} total</span>
+      </div>
+      <div class="th-row"><span>Topic</span><span>Minutes</span><span>Duration</span><span>Days Needed</span></div>
+      <div class="week-topics">${rows}</div>
+    </div>`;
+  }).join('');
+}
+
+function buildSchedule(hpd) {
+  const mpd = hpd * 60;
+  const allDays = [];
+  // Build queue keeping group boundaries
+  const queue = groups.flatMap(g => g.topics.map(t => ({ ...t, group: g.label, color: g.color })));
+  const rem = queue.map(t => ({ ...t }));
+  let dayTopics = [], dayMins = 0;
+
+  while (rem.length > 0) {
+    const t = rem[0];
+    if (dayMins + t.mins <= mpd + 5) {
+      dayTopics.push({ name: t.name, mins: t.mins, color: t.color, group: t.group });
+      dayMins += t.mins;
+      rem.shift();
+    } else {
+      const canFit = mpd - dayMins;
+      if (canFit > 10) {
+        dayTopics.push({ name: t.name + ' (cont.)', mins: canFit, color: t.color, group: t.group });
+        rem[0].mins -= canFit;
+        dayMins += canFit;
+      }
+      allDays.push({ topics: dayTopics, total: dayMins });
+      dayTopics = []; dayMins = 0;
+    }
+  }
+  if (dayTopics.length > 0) allDays.push({ topics: dayTopics, total: dayMins });
+  return allDays;
+}
+
+function renderCalendar(hpd) {
+  const days = buildSchedule(hpd);
+  let html = '';
+  for (let w = 0; w < days.length; w += 7) {
+    const chunk = days.slice(w, w + 7);
+    const wNum  = Math.floor(w / 7) + 1;
+    const cards = chunk.map((day, i) => {
+      const dayNum = w + i + 1;
+      const topicsHtml = day.topics.map(t =>
+        `<div class="dc-topic">
+          <span class="dc-name" style="border-left:2px solid ${t.color};padding-left:5px">${t.name}</span>
+          <span class="dc-time">${fmt(t.mins)}</span>
+        </div>`
+      ).join('');
+      return `<div class="day-card">
+        <div class="day-label">Day ${dayNum}</div>
+        ${topicsHtml}
+        <div class="dc-total"><span>Total</span><span>${fmt(day.total)}</span></div>
+      </div>`;
+    }).join('');
+    html += `<div class="cal-week-block">
+      <div class="cal-week-label">── Calendar Week ${wNum} ──</div>
+      <div class="cal-days-row">${cards}</div>
+    </div>`;
+  }
+  document.getElementById('calendarOutput').innerHTML = html;
+}
+
+function render() {
+  const hrs = parseFloat(document.getElementById('hrsSlider').value);
+  document.getElementById('hrsVal').textContent = hrs + ' hrs';
+  renderStats(hrs);
+  renderWeeklyTopics(hrs);
+  renderCalendar(hrs);
+}
+
+document.getElementById('hrsSlider').addEventListener('input', render);
+render();
+</script>
+</body>
+</html>

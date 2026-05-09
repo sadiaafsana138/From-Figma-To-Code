@@ -1,0 +1,10 @@
+*{
+margin: 0;
+}
+.header{
+    height: 500px;
+    background-image:url(images/banner/banner1.png);
+    background-repeat: no-repeat;
+     background-size: cover;
+   background-attachment: fixed;
+}

@@ -1,0 +1,11 @@
+*{
+margin: 0;
+}
+.header{
+    
+    position: absolute;
+width: cover;
+height: 808px;
+
+    background-image:url(images/banner/banner1.png);
+}

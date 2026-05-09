@@ -1,0 +1,15 @@
+*{
+margin: 5px;
+}
+.section1{
+    background-image: url(images/banner/banner3.png);
+    height: 500px;
+    width:1600px;
+    background-repeat: no-repeat;
+    background-color: blue;
+    background-attachment: fixed;
+}
+#head-text1{
+    color: white;
+
+}
